@@ -1,5 +1,8 @@
 package com.cts.hotel.model;
 
+
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 //• Payment (PaymentID, UserID, BookingID, Amount, Status, PaymentMethod)
 
@@ -21,26 +23,23 @@ public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int paymentId;
-
+	
 	@Column(nullable = false)
 	private int userId;
-
+	
 	@Column(nullable = false)
 	private int bookingId;
-
+	
 	@Column(nullable = false)
 	private int amount;
-
+	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private PaymentStatus status;
-
+	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private PaymentType paymentMethod;
-	
-	@Transient
-	private Boolean useLoyaltyPoints = false;
+	private PaymentType paymentMethod ;
 
 	public int getPaymentId() {
 		return paymentId;
@@ -104,14 +103,6 @@ public class Payment {
 	public Payment() {
 		super();
 	}
-	
-	public boolean isUseLoyaltyPoints() {
-	    return useLoyaltyPoints;
-	}
-
-	public void setUseLoyaltyPoints(boolean useLoyaltyPoints) {
-	    this.useLoyaltyPoints = useLoyaltyPoints;
-	}
 
 	@Override
 	public String toString() {
@@ -119,4 +110,7 @@ public class Payment {
 				+ amount + ", status=" + status + ", paymentMethod=" + paymentMethod + "]";
 	}
 
+	
+	
+	
 }

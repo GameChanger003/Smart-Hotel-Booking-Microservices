@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "booking-microservice")
-public interface PaymentServiceClient {
+public interface BookingClient {
 
     @GetMapping("/users/booking/{bookingId}")
     ResponseEntity<Booking> getBookingById(
