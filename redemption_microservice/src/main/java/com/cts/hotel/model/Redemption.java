@@ -18,7 +18,7 @@ public class Redemption {
 	private int UserID;
 	private int BookingID;
 	private int PointsUsed;
-	private int DiscountAmount;
+	private float DiscountAmount;
 
 	public int getRedemptionID() {
 		return RedemptionID;
@@ -56,7 +56,7 @@ public class Redemption {
 		return DiscountAmount;
 	}
 
-	public void setDiscountAmount(int discountAmount) {
+	public void setDiscountAmount(float discountAmount) {
 		DiscountAmount = discountAmount;
 	}
 
@@ -65,7 +65,7 @@ public class Redemption {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Redemption(int redemptionID, int userID, int bookingID, int pointsUsed, int discountAmount) {
+	public Redemption(int redemptionID, int userID, int bookingID, int pointsUsed, float discountAmount) {
 		super();
 		RedemptionID = redemptionID;
 		UserID = userID;
