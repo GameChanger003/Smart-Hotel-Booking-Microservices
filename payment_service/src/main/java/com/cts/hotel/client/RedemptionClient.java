@@ -11,9 +11,10 @@ import com.cts.hotel.model.Redemption;
 @FeignClient(name = "redemption-microservice")
 public interface RedemptionClient {
 
-    @PostMapping(value = "/user/redemption/add", consumes = "application/json")
-    ResponseEntity<Redemption> saveRedemption(
-        @RequestHeader("Authorization") String token,
-        @RequestBody Redemption redemption
-    );
+	@PostMapping("/user/redemption/add")
+	ResponseEntity<Redemption> saveRedemption(
+	    @RequestHeader("Authorization") String token,
+	    @RequestBody Redemption redemption
+	);
+
 }

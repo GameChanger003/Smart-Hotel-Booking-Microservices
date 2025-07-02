@@ -16,11 +16,12 @@ import com.cts.hotel.model.Loyality;
 @FeignClient(name = "loyality-micro-server")
 public interface LoyalityClient {
 
-    @GetMapping("/user/loyality/{id}")
-    ResponseEntity<Loyality> getLoyalityById(
-        @RequestHeader("Authorization") String token,
-        @PathVariable("id") int userId
-    );
+	@GetMapping("/user/loyality/user/{userId}")
+	ResponseEntity<Loyality> getLoyalityById(
+	    @RequestHeader("Authorization") String token,
+	    @PathVariable("userId") int userId
+	);
+
 
     @PostMapping(value = "/user/loyality/add", consumes = "application/json")
     ResponseEntity<Loyality> saveLoyalty(

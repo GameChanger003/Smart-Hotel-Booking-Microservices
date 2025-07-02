@@ -1,17 +1,23 @@
 package com.cts.hotel.client;
 
-import com.cts.hotel.model.Loyality;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+
+import com.cts.hotel.model.Loyality;
 
 @FeignClient(name = "loyality-micro-server")
 public interface LoyalityClient {
 
-    @GetMapping("/user/loyality/{id}")
-    ResponseEntity<Loyality> getLoyalityById(
+    @GetMapping("/user/loyality/user/{userId}")
+    ResponseEntity<Loyality> getLoyaltyByUserId(
         @RequestHeader("Authorization") String token,
-        @PathVariable("id") int id // ✅ fixed mismatch from "bookingId" to "id"
+        @PathVariable("userId") int userId
     );
 
     @PostMapping(value = "/user/loyality/add", consumes = "application/json")
