@@ -1,8 +1,10 @@
 package com.cts.hotel.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,5 +60,22 @@ public class BookingController {
         Booking updated = bookingService.updateBooking(oldBookingId, newBooking);
         return ResponseEntity.ok(updated);
     }
+    
+    @GetMapping("/conflicts")
+    public List<Booking> getConflictingBookings(
+        @RequestParam("roomId") int roomId,
+        @RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkInDate,
+        @RequestParam("checkOutDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOutDate
+    ) {
+        return bookingService.getConflictingBookings(roomId, checkInDate, checkOutDate);
+    }
+
+    @GetMapping("/user/{userId}/past")
+    public List<Booking> getPreviousBookingsByUser(
+        @PathVariable int userId
+    ) {
+        return bookingService.getPreviousBookingsByUserID(userId);
+    }
+
 
 }

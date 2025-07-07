@@ -26,7 +26,7 @@ public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
 
-	@GetMapping("/booking/{bookingId}/id")
+	@GetMapping("/booking/{bookingId}")
 	public ResponseEntity<Integer> getPaymentIdByBooking(@PathVariable int bookingId) {
 		int paymentId = paymentService.getPaymentIdByBookingId(bookingId);
 		return ResponseEntity.ok(paymentId);

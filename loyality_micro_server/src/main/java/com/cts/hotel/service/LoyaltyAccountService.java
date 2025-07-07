@@ -17,6 +17,7 @@ public class LoyaltyAccountService {
 
     public ResponseEntity<Loyality> saveLoyalty(Loyality loyaltyAccount) {
         Loyality saved = loyalityRepo.save(loyaltyAccount);
+        System.out.println(saved);
         return ResponseEntity.ok(saved);
     }
 

@@ -22,29 +22,15 @@ public class RedemptionService {
     private LoyalityClient loyalityClient;
 
     public Redemption saveRedemption(Redemption redemption, String token) {
-        // 1. Fetch loyalty data via Feign
         ResponseEntity<Loyality> loyaltyRes = loyalityClient.getLoyalityById(token, redemption.getUserID());
-        Loyality loyalty = loyaltyRes.getBody();
 
-        if (loyalty == null || loyaltyRes.getStatusCode().is4xxClientError()) {
-            throw new IllegalArgumentException("User does not have a valid loyalty account.");
+        if (!loyaltyRes.getStatusCode().is2xxSuccessful() || loyaltyRes.getBody() == null) {
+            throw new IllegalArgumentException("Cannot record redemption: Loyalty account not found.");
         }
 
-        // 2. Deduct points
-        int updatedPoints = loyalty.getPointsBalance() - redemption.getPointsUsed();
-        if (updatedPoints < 0) {
-            throw new IllegalArgumentException("Insufficient loyalty points.");
-        }
-
-        loyalty.setPointsBalance(updatedPoints);
-        loyalty.setLastUpdated(new Date());
-
-        // 3. Update via Feign
-        loyalityClient.updateLoyalty(token, loyalty.getLoyaltyID(), loyalty);
-
-        // 4. Save redemption record
         return redemptionRepo.save(redemption);
     }
+
 
     public List<Redemption> getRedemption() {
         return redemptionRepo.findAll();

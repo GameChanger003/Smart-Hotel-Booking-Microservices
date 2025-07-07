@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import com.cts.hotel.hotelusers.model.Role;
 import com.cts.hotel.hotelusers.model.User;
 import com.cts.hotel.hotelusers.repo.UserRepository;
+import com.cts.hotel.serviceInterface.IUserService;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;

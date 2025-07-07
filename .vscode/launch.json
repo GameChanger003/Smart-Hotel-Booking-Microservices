@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "HotelserverApplication",
+            "request": "launch",
+            "mainClass": "com.cts.hotel.hotelserver.HotelserverApplication"
+        },
+        {
+            "type": "java",
+            "name": "HotelMainServerApplication",
+            "request": "launch",
+            "mainClass": "com.cts.hotel.hotel_main_server.HotelMainServerApplication",
+            "projectName": "hotel_main_server"
+        },
+        {
+            "type": "java",
+            "name": "HotelusersApplication",
+            "request": "launch",
+            "mainClass": "com.cts.hotel.hotelusers.HotelusersApplication"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-HotelserverApplication<hotelserver>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cts.hotel.hotelserver.HotelserverApplication",
+            "projectName": "hotelserver",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

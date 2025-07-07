@@ -3,6 +3,7 @@ package com.cts.hotel.service;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class BookingService {
     public ResponseEntity<Booking> getById(int bookingId) {
         Optional<Booking> optionalBooking = bookingRepository.findById(bookingId);
         return optionalBooking.map(ResponseEntity::ok)
-            .orElseGet(() -> ResponseEntity.status(422).body(null));
+            .orElseGet(() -> ResponseEntity.status(404).body(null));
     }
 
     public ResponseEntity<?> bookRoomIfAvailable(Booking booking) {
@@ -53,7 +54,7 @@ public class BookingService {
             return ResponseEntity.status(409).body("Room is already booked for the selected dates.");
         }
 
-        booking.setStatus(BookingStatus.BOOKED);
+        booking.setStatus(BookingStatus.PENDING);
         return ResponseEntity.ok(bookingRepository.save(booking));
     }
 
@@ -90,4 +91,13 @@ public class BookingService {
 
         return bookingRepository.save(existing);
     }
+    
+    public List<Booking> getConflictingBookings(int roomId, Date checkIn, Date checkOut) {
+        return bookingRepository.findConflictingBookings(roomId, checkIn, checkOut);
+    }
+
+    public List<Booking> getPreviousBookingsByUserID(int userId) {
+        return bookingRepository.findPreviousBookingsByUserID(userId);
+    }
+
 }
